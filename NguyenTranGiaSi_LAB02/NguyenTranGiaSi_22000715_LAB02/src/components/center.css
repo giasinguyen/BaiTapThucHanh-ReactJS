@@ -1,0 +1,21 @@
+.center-container {
+    display: flex; 
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .left-image-container,
+  .right-image-container {
+    flex: 1;             
+    margin: 0 10px;      
+  }
+  
+  .right-image-container img {
+    width: 100%;     
+    height: auto;     
+    display: block;
+  }
+  
+.center-image1{
+  width: 400px;
+}
