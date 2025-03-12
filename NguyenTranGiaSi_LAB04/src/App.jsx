@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import './App.css'       
 import Header from './components/header'
 import Center from './components/center'
@@ -9,7 +8,9 @@ function App() {
   return (
     <>
       <Header />
+      <br></br>
       <Center />
+      <br></br>
       <Footer />
     </>
   )
