@@ -1,12 +1,21 @@
-# React + Vite
+1. Layout (30-45) commit (grid tailwind--> ok)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2. API Overview --> commit (30-45)
 
-Currently, two official plugins are available:
+3. DataTable React JS --> commit (30-45)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+4. DataTable React JS -API --> commit 
 
-## Expanding the ESLint configuration
+5. isActive-NavLink (45)--> commit
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+6. React Router - commit (45)
+
+7. SPA -Single Application Page-commit (45)
+
+8. Click Edit Modal --> Tailwind (or) (45)-->commit
+
+9. Modal connect API (get, put)--> commit (45)
+
+10. Add user --> Modal + API post--> commit
+
+11. Css all admin app --> commit
