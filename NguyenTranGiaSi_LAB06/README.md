@@ -1,3 +1,6 @@
+# Nguyễn Trần Gia Sĩ - LAB06
+![LAB06](./Dashboard.PNG)
+
 1. Layout (30-45) commit (grid tailwind--> ok)
 
 2. API Overview --> commit (30-45)
