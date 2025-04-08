@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import Squares from "../../assets/Lab_05/Squares1.png";
 import Search from "../../assets/Lab_05/Search.png";
 import Ring from "../../assets/Lab_05/Ring.png";
@@ -6,10 +7,21 @@ import Question from "../../assets/Lab_05/Questions.png";
 import Avatar1 from "../../assets/Lab_05/Avatar1.png";
 
 const Header = () => {
+  const location = useLocation();
+  
+  const getPageTitle = () => {
+    const path = location.pathname.replace('/', '');
+    
+    if (path === '') return 'Dashboard';
+    return path.charAt(0).toUpperCase() + path.slice(1);
+  };
+
+  const showOverview = location.pathname === '/';
+
   return (
-    <div>
-      <h2 className="text-4xl font-semibold text-pink-500">Dashboard</h2>
-      <div className="absolute right-0 flex items-center">
+    <div className="mb-6">
+      <h2 className="text-4xl font-semibold text-pink-500">{getPageTitle()}</h2>
+      <div className="absolute right-0 top-6 flex items-center">
         <div className="relative w-60">
           <input
             type="text"
@@ -40,10 +52,13 @@ const Header = () => {
           />
         </div>
       </div>
-      <div className="flex font-bold items-center mt-5">
-        <img src={Squares} alt="Overview icon" />
-        <h3>Overview</h3>
-      </div>
+      
+      {showOverview && (
+        <div className="flex font-bold items-center mt-5">
+          <img src={Squares} alt="Overview icon" className="mr-2" />
+          <h3>Overview</h3>
+        </div>
+      )}
     </div>
   );
 };

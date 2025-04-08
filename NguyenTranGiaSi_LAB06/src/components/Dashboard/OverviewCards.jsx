@@ -1,32 +1,6 @@
 import React from "react";
 
-const OverviewCards = ({ data, loading, error, formatCurrency }) => {
-    if (loading) {
-        return (
-            <div className="grid grid-cols-3 gap-4 my-6">
-                <div className="p-4 bg-pink-100 rounded-lg shadow animate-pulse">
-                    <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
-                    <div className="h-8 bg-gray-300 rounded w-2/3"></div>
-                </div>
-                <div className="p-4 bg-blue-100 rounded-lg shadow animate-pulse">
-                    <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
-                    <div className="h-8 bg-gray-300 rounded w-2/3"></div>
-                </div>
-                <div className="p-4 bg-green-100 rounded-lg shadow animate-pulse">
-                    <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
-                    <div className="h-8 bg-gray-300 rounded w-2/3"></div>
-                </div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="bg-red-100 border-l-4 border-red-500 p-4 my-6">
-                <p className="text-red-700">{error}</p>
-            </div>
-        );
-    }
+const OverviewCards = ({ data, formatCurrency }) => {
 
     return (
         <div className="grid grid-cols-3 gap-4 my-6">
