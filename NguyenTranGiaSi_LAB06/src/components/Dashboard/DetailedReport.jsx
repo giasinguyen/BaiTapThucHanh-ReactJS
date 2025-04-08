@@ -7,17 +7,23 @@ const DetailedReport = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 6;
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [currentItem, setCurrentItem] = useState(null);
+    const [currentItemId, setCurrentItemId] = useState(null);
   
-    useEffect(() => {
+    const fetchData = () => {
+      console.log("Fetching data from API...");
       axios
         .get("https://67f3b75dcbef97f40d2bc520.mockapi.io/DataGiaSi")
         .then((response) => {
+          console.log("Data fetched successfully:", response.data);
           setDataTable(response.data);
         })
         .catch((error) => {
           console.error("Error fetching data", error);
         });
+    };
+
+    useEffect(() => {
+      fetchData();
     }, []);
   
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -42,17 +48,19 @@ const DetailedReport = () => {
     };
   
     const handleEdit = (item) => {
-      setCurrentItem(item);
+      console.log("Edit item:", item);
+      setCurrentItemId(item.id);
       setIsModalOpen(true);
     };
   
     const handleSaveEdit = (updatedItem) => {
+      console.log("Saving updated item:", updatedItem);
       const updatedData = dataTable.map((item) => 
         item.id === updatedItem.id ? updatedItem : item
       );
       setDataTable(updatedData);
       
-      console.log("Saved:", updatedItem);
+      console.log("Updated data table:", updatedData);
     };
   
     const handleAdd = (item) => {
@@ -60,7 +68,7 @@ const DetailedReport = () => {
     };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md">
+    <div className="bg-white p-4 rounded-lg shadow-md relative">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-xl font-bold text-gray-700">Detailed Report</h3>
         <div>
@@ -156,7 +164,7 @@ const DetailedReport = () => {
       <Modal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
-        item={currentItem}
+        itemId={currentItemId}
         onSave={handleSaveEdit}
       />
     </div>
