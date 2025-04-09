@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-
+import Modal from "../../Modal/Modal";
 
 const DetailedReport = () => {
     const [dataTable, setDataTable] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 6;
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentItem, setCurrentItem] = useState(null);
   
     useEffect(() => {
       axios
         .get("https://67f3b75dcbef97f40d2bc520.mockapi.io/DataGiaSi")
         .then((response) => {
-            console.log(response.data)
           setDataTable(response.data);
         })
         .catch((error) => {
@@ -42,12 +42,23 @@ const DetailedReport = () => {
     };
   
     const handleEdit = (item) => {
-      console.log("Edit", item);
+      setCurrentItem(item);
+      setIsModalOpen(true);
+    };
+  
+    const handleSaveEdit = (updatedItem) => {
+      const updatedData = dataTable.map((item) => 
+        item.id === updatedItem.id ? updatedItem : item
+      );
+      setDataTable(updatedData);
+      
+      console.log("Saved:", updatedItem);
     };
   
     const handleAdd = (item) => {
       console.log("Add", item);
     };
+
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-4">
@@ -92,7 +103,17 @@ const DetailedReport = () => {
               <td className="border-b p-2">{item.company}</td>
               <td className="border-b p-2">{item.orderValue}</td>
               <td className="border-b p-2">{item.orderDate}</td>
-              <td className="border-b p-2">{item.status}</td>
+              <td className="border-b p-2">
+                <span 
+                  className={`px-2 py-1 rounded-full text-xs font-medium 
+                    ${item.status === 'Completed' ? 'bg-green-100 text-green-800' : 
+                      item.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : 
+                      item.status === 'Processing' ? 'bg-blue-100 text-blue-800' : 
+                      'bg-red-100 text-red-800'}`}
+                >
+                  {item.status}
+                </span>
+              </td>
               <td className="border-b p-2">
                 <button
                   onClick={() => handleEdit(item)}
@@ -104,7 +125,7 @@ const DetailedReport = () => {
                   onClick={() => handleAdd(item)}
                   className="bg-purple-500 hover:bg-purple-600 text-white py-1 px-3 rounded"
                 >
-                  Thêm
+                  Add
                 </button>
               </td>
             </tr>
@@ -131,6 +152,13 @@ const DetailedReport = () => {
           Next
         </button>
       </div>
+      
+      <Modal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        item={currentItem}
+        onSave={handleSaveEdit}
+      />
     </div>
   );
 };
