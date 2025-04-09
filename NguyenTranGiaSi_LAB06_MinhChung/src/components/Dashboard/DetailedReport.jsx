@@ -1,137 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const dataTable = [
-  {
-    id: 1,
-    customerName: "Elizabeth Lee",
-    company: "AvatarSystems",
-    orderValue: "$359",
-    orderDate: "10/07/2023",
-    status: "New",
-  },
-  {
-    id: 2,
-    customerName: "Carlos Garcia",
-    company: "SmoozeShift",
-    orderValue: "$747",
-    orderDate: "24/07/2023",
-    status: "New",
-  },
-  {
-    id: 3,
-    customerName: "Elizabeth Bailey",
-    company: "Prime Time Telecom",
-    orderValue: "$564",
-    orderDate: "08/08/2023",
-    status: "In-progress",
-  },
-  {
-    id: 4,
-    customerName: "Ryan Brown",
-    company: "OmniTech Corporation",
-    orderValue: "$541",
-    orderDate: "31/08/2023",
-    status: "In-progress",
-  },
-  {
-    id: 5,
-    customerName: "Ryan Young",
-    company: "DataStream Inc.",
-    orderValue: "$769",
-    orderDate: "01/05/2023",
-    status: "Completed",
-  },
-  {
-    id: 6,
-    customerName: "Hailey Adams",
-    company: "FlowRush",
-    orderValue: "$922",
-    orderDate: "10/06/2023",
-    status: "Completed",
-  },
-  {
-    id: 7,
-    customerName: "Elizabeth Lee",
-    company: "AvatarSystems",
-    orderValue: "$359",
-    orderDate: "10/07/2023",
-    status: "New",
-  },
-  {
-    id: 8,
-    customerName: "Carlos Garcia",
-    company: "SmoozeShift",
-    orderValue: "$747",
-    orderDate: "24/07/2023",
-    status: "New",
-  },
-  {
-    id: 9,
-    customerName: "Elizabeth Bailey",
-    company: "Prime Time Telecom",
-    orderValue: "$564",
-    orderDate: "08/08/2023",
-    status: "In-progress",
-  },
-  {
-    id: 10,
-    customerName: "Ryan Brown",
-    company: "OmniTech Corporation",
-    orderValue: "$541",
-    orderDate: "31/08/2023",
-    status: "In-progress",
-  },
-  {
-    id: 11,
-    customerName: "Ryan Young",
-    company: "DataStream Inc.",
-    orderValue: "$769",
-    orderDate: "01/05/2023",
-    status: "Completed",
-  },
-  {
-    id: 12,
-    customerName: "Hailey Adams",
-    company: "FlowRush",
-    orderValue: "$922",
-    orderDate: "10/06/2023",
-    status: "Completed",
-  },
-];
+
 
 const DetailedReport = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = dataTable.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(dataTable.length / itemsPerPage);
-
-  const handlePrev = () => {
-    setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
-  };
-
-  const handleNext = () => {
-    setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev));
-  };
-
-  const handleImport = () => {
-    console.log("Import data");
-  };
-
-  const handleExport = () => {
-    console.log("Export data");
-  };
-
-  const handleEdit = (item) => {
-    console.log("Edit", item);
-  };
-
-  const handleAdd = (item) => {
-    console.log("Add", item);
-  };
-
+    const [dataTable, setDataTable] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
+  
+    useEffect(() => {
+      axios
+        .get("https://67f3b75dcbef97f40d2bc520.mockapi.io/DataGiaSi")
+        .then((response) => {
+          setDataTable(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data", error);
+        });
+    }, []);
+  
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = dataTable.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(dataTable.length / itemsPerPage);
+  
+    const handlePrev = () => {
+      setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
+    };
+  
+    const handleNext = () => {
+      setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev));
+    };
+  
+    const handleImport = () => {
+      console.log("Import data");
+    };
+  
+    const handleExport = () => {
+      console.log("Export data");
+    };
+  
+    const handleEdit = (item) => {
+      console.log("Edit", item);
+    };
+  
+    const handleAdd = (item) => {
+      console.log("Add", item);
+    };
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-4">
